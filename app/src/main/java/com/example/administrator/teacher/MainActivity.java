@@ -17,6 +17,23 @@ public class MainActivity extends AppCompatActivity {
         score = (TextView)findViewById(R.id.score);
         score2 = (TextView)findViewById(R.id.score2);
     }
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String scorea = ((TextView)findViewById(R.id.score)).getText().toString();
+        String scoreb = ((TextView)findViewById(R.id.score2)).getText().toString();
+        outState.putString ("teama_score",scorea);
+        outState.putString ("teamb_score",scoreb);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String scorea = savedInstanceState.getString("teama_score");
+        String scoreb = savedInstanceState.getString("teamb_score");
+        ((TextView)findViewById(R.id.score)).setText(scorea);
+        ((TextView)findViewById(R.id.score2)).setText(scoreb);
+    }
+
     public void btnAdd1(View btn) {
         if(btn.getId()==R.id.btn_1){
             showScore(1);
